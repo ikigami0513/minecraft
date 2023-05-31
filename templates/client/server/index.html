@@ -1,7 +1,15 @@
 {% extends 'layout.html' %}
 
-{% block title %}Login{% endblock title %}
+{% block title %}Server{% endblock title %}
 
 {% block content %}
-    
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else%}
+        {% if server_status %}
+            <p>Server is running</p>
+        {% else %}
+            <p>Server isn't running yet</p>
+        {% endif %}
+    {% endif %}
 {% endblock content %}

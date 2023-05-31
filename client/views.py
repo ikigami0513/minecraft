@@ -1,3 +1,5 @@
+import subprocess
+import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
@@ -31,5 +33,28 @@ class Logout(View):
         return redirect('index')
     
 class Server(View):
+    def is_server_running(self):
+        process = subprocess.Popen(['ps', 'aux'], stdout=subprocess.PIPE)
+        output, _ = process.communicate()
+        return b'run.sh' in output
+
     def get(self, request):
-        return render(request, 'client/server/index.html')
+        context = {
+            'server_status': self.is_server_running()
+        }
+        return render(request, 'client/server/index.html', context=context)
+    
+    def post(self, request):
+        if self.is_server_running():
+            return redirect('server')
+        
+        if not os.path.exists('/minecraft/run.sh'):
+            context = {
+                'error': 'Le fichier de mise en route du serveur n\'existe pas',
+            }
+            return render(request, 'client/server/index.html', context=context)
+        
+        command = '/minecraft/run.sh'
+        subprocess.Popen(command, shell=True)
+
+        return redirect('server')
