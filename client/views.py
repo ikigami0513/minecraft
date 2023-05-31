@@ -29,3 +29,7 @@ class Logout(View):
     def get(self, request):
         logout(request)
         return redirect('index')
+    
+class Server(View):
+    def get(self, request):
+        return render(request, 'client/server/index.html')

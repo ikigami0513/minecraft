@@ -17,9 +17,11 @@
                 <div class="flex items-center space-x-4">
                     {% if user.is_authenticated %}
                         <div class="flex items-center">
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-                                <span class="mr-2">Serveur</span>
-                            </button>
+                            <a href="{% url 'server' %}">
+                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                                    <span class="mr-2">Serveur</span>
+                                </button>
+                            </a>
                         </div>
                         <div class="relative group">
                             <div class="flex items-center">
