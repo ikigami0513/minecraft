@@ -62,7 +62,7 @@ class Server(View):
                         'error': 'Le serveur est déjà en cours d\'exécution.',
                     }
                 else:
-                    command = 'echo Ha7iz5ni5? | sudo /minecraft/run.sh'
+                    command = 'cd /minecraft && sudo ./run.sh'
                     subprocess.Popen(command, shell=True)
                     context = {
                         'success': 'Le serveur a bien démarré.',
