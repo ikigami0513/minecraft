@@ -4,6 +4,7 @@ document.getElementById("submit").addEventListener('click', event => {
 
     var data = {
         action: document.getElementById('action'),
+        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken'),
     };
 
     fetch(url, {
