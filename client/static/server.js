@@ -4,13 +4,13 @@ document.getElementById("submit").addEventListener('click', event => {
 
     var data = {
         action: document.getElementById('action'),
-        csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken'),
     };
 
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.getElementByName('csrfmiddlewaretoken')[0].value,
         },
         body: JSON.stringify(data)
     })

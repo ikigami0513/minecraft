@@ -1,5 +1,6 @@
 import subprocess
 import os
+import json
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -52,7 +53,8 @@ class Server(View):
             }
 
         else:
-            action = request.POST['action']
+            data = json.loads(request.body)
+            action = data.get('action')
 
             if action == "start":
                 if self.is_server_running():
