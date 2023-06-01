@@ -1,5 +1,6 @@
 import subprocess
 import os
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
@@ -45,16 +46,41 @@ class Server(View):
         return render(request, 'client/server/index.html', context=context)
     
     def post(self, request):
-        if self.is_server_running():
-            return redirect('server')
-        
         if not os.path.exists('/minecraft/run.sh'):
             context = {
-                'error': 'Le fichier de mise en route du serveur n\'existe pas',
+                'error': 'Le fichier de mise en route du serveur n\'existe pas.',
             }
-            return render(request, 'client/server/index.html', context=context)
-        
-        command = '/minecraft/run.sh'
-        subprocess.Popen(command, shell=True)
 
-        return redirect('server')
+        else:
+            action = request.POST['action']
+
+            if action == "start":
+                if self.is_server_running():
+                    context = {
+                        'error': 'Le serveur est déjà en cours d\'exécution.',
+                    }
+                else:
+                    command = 'echo Ha7iz5ni5? | sudo /minecraft/run.sh'
+                    subprocess.Popen(command, shell=True)
+                    context = {
+                        'success': 'Le serveur a bien démarré.',
+                    }
+
+            elif action == "stop":
+                if not self.is_server_running():
+                    context = {
+                        'error': 'Le serveur est déjà à l\'arrêt.',
+                    }
+                else:
+                    command = 'stop'
+                    subprocess.Popen(command, shell=True)
+                    context = {
+                        'success': 'Le serveur a bien été stoppé.'
+                    }
+
+            else:
+                context = {
+                    'error': 'L\'action demandée n\'est pas valide.',
+                }
+        
+        return JsonResponse(context)
