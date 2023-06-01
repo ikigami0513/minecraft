@@ -54,6 +54,7 @@ class Server(View):
 
         else:
             data = json.loads(request.body)
+            print(data)
             action = data.get('action')
             print(action)
 
