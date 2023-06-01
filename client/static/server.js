@@ -3,7 +3,7 @@ document.getElementById("submit").addEventListener('click', event => {
     const url = window.location.href;
 
     var data = {
-        action: document.getElementById('action'),
+        action: document.getElementById('action').value,
     };
 
     fetch(url, {
