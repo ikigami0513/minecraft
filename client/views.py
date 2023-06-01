@@ -74,8 +74,10 @@ class Server(View):
                         'error': 'Le serveur est déjà à l\'arrêt.',
                     }
                 else:
+                    run_command = 'cd /minecraft && sudo ./run.sh'
+                    process = subprocess.Popen(run_command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
                     command = 'stop'
-                    subprocess.Popen(command, shell=True)
+                    sortie, erreur = process.communicate(command.encode())
                     context = {
                         'success': 'Le serveur a bien été stoppé.'
                     }
