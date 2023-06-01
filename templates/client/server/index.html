@@ -13,6 +13,7 @@
                 {% csrf_token %}
                 <input type="hidden" id="action" name="action" value="stop"/>
                 <input type="submit" id="submit" name="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" value="Stopper le serveur"/>
+            </form>
         {% else %}
             <p>Le serveur est éteint</p>
             <form action="" method="POST">
