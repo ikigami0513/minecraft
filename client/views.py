@@ -25,7 +25,7 @@ class Login(View):
             login(request, user)
             return redirect('index')
         else:
-            return render(request, 'client/user/login.html', {
+            return render(request, 'client/users/login.html', {
                 'error_message': 'Invalid login',
             })
         
