@@ -1,4 +1,4 @@
-document.getElementById("submit").addEventListener(event => {
+document.getElementById("submit").addEventListener('click', event => {
     event.preventDefault();
     const url = window.location.href;
 
