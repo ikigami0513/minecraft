@@ -6,6 +6,8 @@ document.getElementById("submit").addEventListener('click', event => {
         action: document.getElementById('action').value,
     };
 
+    console.log(data)
+
     fetch(url, {
         method: 'POST',
         headers: {
