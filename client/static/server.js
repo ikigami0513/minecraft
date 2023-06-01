@@ -12,7 +12,7 @@ document.getElementById("submit").addEventListener('click', event => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': document.getElementByName('csrfmiddlewaretoken')[0].value,
+            'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
         },
         body: JSON.stringify(data)
     })
