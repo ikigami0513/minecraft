@@ -65,6 +65,7 @@ class Server(View):
                     command = 'cd /minecraft && sudo ./run.sh'
                     subprocess.Popen(command, shell=True)
                     context = {
+                        'action': 'start',
                         'success': 'Le serveur a bien démarré.',
                     }
 
@@ -79,6 +80,7 @@ class Server(View):
                     command = 'stop'
                     sortie, erreur = process.communicate(command.encode())
                     context = {
+                        'action': 'stop',
                         'success': 'Le serveur a bien été stoppé.'
                     }
 

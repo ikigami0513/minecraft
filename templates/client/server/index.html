@@ -8,19 +8,39 @@
         <p>{{ error }}</p>
     {% else%}
         {% if server_status %}
-            <p>Le serveur est allumé</p>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <input type="hidden" id="action" name="action" value="stop"/>
-                <input type="submit" id="submit" name="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" value="Stopper le serveur"/>
-            </form>
+            <div id="stop_server">
+                <p>Le serveur est allumé</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="action" name="action" value="stop"/>
+                    <input type="submit" id="submit" name="submit" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded" value="Stopper le serveur"/>
+                </form>
+            </div>
+            <div id="start_server" class="hidden">
+                <p>Le serveur est éteint</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="action" name="action" value="start"/>
+                    <input type="submit" id="submit" name="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded" value="Démarrer le serveur"/>
+                </form>
+            </div>
         {% else %}
-            <p>Le serveur est éteint</p>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <input type="hidden" id="action" name="action" value="start"/>
-                <input type="submit" id="submit" name="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" value="Démarrer le serveur"/>
-            </form>
+            <div id="stop_server" class="hidden">
+                <p>Le serveur est allumé</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="action" name="action" value="stop"/>
+                    <input type="submit" id="submit" name="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" value="Stopper le serveur"/>
+                </form>
+            </div>
+            <div id="start_server">
+                <p>Le serveur est éteint</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="action" name="action" value="start"/>
+                    <input type="submit" id="submit" name="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded" value="Démarrer le serveur"/>
+                </form>
+            </div>
         {% endif %}
     {% endif %}
 
